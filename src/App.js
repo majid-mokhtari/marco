@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import NewTimerForm from "./Timers/NewTimerForm";
+import TimersList from "./Timers/TimersList";
+import "./App.css";
+import { Button, Icon } from "semantic-ui-react";
 
 function App() {
+  const [timers, setTimers] = useState([]);
+  const [addTimerFormVisible, setAddTimerFormVisible] = useState(false);
+
+  const onAddTimerClick = () => setAddTimerFormVisible(true);
+
+  const onNewTimerCreate = (timer) => {
+    setTimers([...timers, timer]);
+  };
+
+  const onCancelCreateNewTimer = () => setAddTimerFormVisible(false);
+
+  const onDeleteTimer = (timer) => {
+    setTimers(timers.filter((t) => t.title !== timer.title));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <h2>Timers</h2>
+      <TimersList timers={timers} onDeleteTimer={onDeleteTimer} />
+      {addTimerFormVisible && (
+        <NewTimerForm
+          onNewTimerCreate={onNewTimerCreate}
+          onCancelCreateNewTimer={onCancelCreateNewTimer}
+        />
+      )}
+      <Button onClick={onAddTimerClick}>
+        <Icon name="plus" color="black" />
+      </Button>
     </div>
   );
 }
