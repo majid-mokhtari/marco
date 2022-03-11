@@ -8,10 +8,6 @@ export default function NewTimerForm({
 }) {
   const [title, setTitle] = useState("");
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
-
   const onTitleChange = (e) => {
     const { value } = e.target;
     setTitle(value);
@@ -29,7 +25,7 @@ export default function NewTimerForm({
   };
 
   return (
-    <Form onSubmit={onSubmit} className="timer-form">
+    <Form className="timer-form">
       <Form.Field className="timer-form-input">
         <label htmlFor="title">Title </label>
         <input
