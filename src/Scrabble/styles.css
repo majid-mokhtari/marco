@@ -1,0 +1,26 @@
+.scrabble-container {
+  min-height: 100vh;
+}
+
+.board-row {
+  display: flex;
+  justify-content: center;
+}
+
+.board-col {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid black;
+  align-items: center;
+}
+
+.level-types-btns {
+  margin: 20px;
+}
+
+.board-container {
+  margin-top: 30px;
+}

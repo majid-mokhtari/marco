@@ -1,38 +1,31 @@
-import { useState } from "react";
-import NewTimerForm from "./Timers/NewTimerForm";
-import TimersList from "./Timers/TimersList";
+import Timers from "./Timers";
+import Scrabble from "./Scrabble";
+import { Tab } from "semantic-ui-react";
 import "./App.css";
-import { Button, Icon } from "semantic-ui-react";
 
 function App() {
-  const [timers, setTimers] = useState([]);
-  const [addTimerFormVisible, setAddTimerFormVisible] = useState(false);
-
-  const onAddTimerClick = () => setAddTimerFormVisible(true);
-
-  const onNewTimerCreate = (timer) => {
-    setTimers([...timers, timer]);
-  };
-
-  const onCancelCreateNewTimer = () => setAddTimerFormVisible(false);
-
-  const onDeleteTimer = (timer) => {
-    setTimers(timers.filter((t) => t.title !== timer.title));
-  };
+  const panes = [
+    {
+      menuItem: "Timers",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <Timers />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Scrabble",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <Scrabble />
+        </Tab.Pane>
+      ),
+    },
+  ];
 
   return (
     <div className="app-container">
-      <h2>Timers</h2>
-      <TimersList timers={timers} onDeleteTimer={onDeleteTimer} />
-      {addTimerFormVisible && (
-        <NewTimerForm
-          onNewTimerCreate={onNewTimerCreate}
-          onCancelCreateNewTimer={onCancelCreateNewTimer}
-        />
-      )}
-      <Button onClick={onAddTimerClick}>
-        <Icon name="plus" color="black" />
-      </Button>
+      <Tab panes={panes} menu={{ pointing: true }} />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Button, Icon } from "semantic-ui-react";
-import "./Timers.css";
 import { formatTime } from "./util";
 
 function Timer({ title, onDeleteTimer }) {

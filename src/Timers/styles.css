@@ -1,3 +1,9 @@
+.timers-container {
+  width: 50%;
+  margin: auto;
+  min-height: 100vh;
+}
+
 .timer-card {
   display: flex;
   flex-direction: column;
@@ -46,4 +52,13 @@
 .timer-form-buttons button {
   width: 100%;
   text-align: center;
+}
+
+.plus-button {
+  padding: 10px;
+  background: #bdb7b7;
+  width: 80px;
+  border-radius: 5px;
+  margin: auto;
+  cursor: pointer;
 }
