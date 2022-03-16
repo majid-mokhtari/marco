@@ -15,7 +15,7 @@ export default function Scrabble() {
 
     candidate.forEach((data, i) => {
       const { row, col, letter } = data;
-      console.log(row, col, letter, updatedBoard);
+      //it works for every level types except out-of-bounds
       if (row < 4 && col < 4) {
         updatedBoard[row][col] = updatedBoard[row][col]
           ? updatedBoard[row][col] + letter
