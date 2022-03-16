@@ -1,4 +1,4 @@
-# Preview App: https://scrabble-majid.herokuapp.com/
+# Preview App: https://scrabble-majid.herokuapp.com
 
 # Getting Started with Create React App
 
