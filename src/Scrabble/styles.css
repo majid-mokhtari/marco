@@ -8,13 +8,27 @@
 }
 
 .board-col {
-  width: 100px;
+  width: 150px;
   height: 100px;
   display: flex;
   justify-content: center;
   text-align: center;
   border: 1px solid black;
   align-items: center;
+}
+
+.board-col span.letter {
+  padding: 25px 50px;
+  border-radius: 10px;
+  background-color: antiquewhite;
+  font-size: 30px;
+}
+
+.board-col span.candidate {
+  padding: 25px 50px;
+  border-radius: 10px;
+  background-color: lightgray;
+  font-size: 30px;
 }
 
 .level-types-btns {

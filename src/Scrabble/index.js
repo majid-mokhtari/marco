@@ -2,31 +2,29 @@ import { useEffect, useState } from "react";
 import { Menu } from "semantic-ui-react";
 import "./styles.css";
 
-// All /api endpoint are POST requests with content-type=application/json. They accept and return JSON bodies.
-
-// Spec
-// Fetch a Level
-// request: http POST "https://scrabble-client.vercel.app/api/scrabble/level" {"level": YOUR-LEVEL}
-// response: {board: matrix[i][j] = letter|null, candidate: array[{row: i, col: j, letter:a-z}]}
-// API Request Log
-// Request (method: POST):
-// url: /api/scrabble
-
-// body: {"level":"start"}
-
 const Board = ({ board, candidate }) => {
   const column = board.length && board[0].length;
+  const { row, col } = candidate.length && candidate[0];
 
   console.log("col", column);
 
+  const getClassName = (boardRow, boardCol) => {
+    if (boardRow === row && boardCol === col) {
+      return "candidate";
+    }
+    return "letter";
+  };
+
   return (
     board.length &&
-    board.map((b, row) => {
+    board.map((arr, boardRow) => {
       return (
-        <div className="board-row" key={row}>
-          {b.map((letter, i) => (
-            <div className="board-col" key={i}>
-              <span>{letter}</span>
+        <div className="board-row" key={boardRow}>
+          {arr.map((letter, boardCol) => (
+            <div className="board-col" key={boardCol}>
+              <span className={letter && getClassName(boardRow, boardCol)}>
+                {letter}
+              </span>
             </div>
           ))}
         </div>
@@ -42,8 +40,20 @@ export default function App() {
   const [candidate, setCandidate] = useState([]);
   const [board, setBoard] = useState([]);
 
-  const mergeBoardAndCandidate = () => {
-    //const [row, col, letter] = candidate.length && candidate[0];
+  const mergeBoardAndCandidate = (board, candidate) => {
+    const { row, col, letter } = candidate.length && candidate[0];
+    console.log(row, col, letter);
+    console.log(board);
+    setBoard(
+      board.map((arr, i) => {
+        if (i === row) {
+          arr[col] = letter;
+          return arr;
+        } else {
+          return arr;
+        }
+      })
+    );
   };
 
   const onLevelTypesClick = (l) => {
@@ -64,32 +74,30 @@ export default function App() {
         }
       );
 
-      if (!response.ok) throw new Error("Error happend");
-
       response = await response.json();
 
-      const { board, candidate } = response;
-
-      setBoard(board);
-      setCandidate(candidate);
-      console.log("response", candidate);
+      if (response.error) {
+        throw new Error(response.message);
+      } else {
+        const { board, candidate } = response;
+        setBoard(board);
+        setCandidate(candidate);
+        mergeBoardAndCandidate(board, candidate);
+      }
     };
 
     fetchApi();
   }, [level]);
 
-  useEffect(() => {
-    mergeBoardAndCandidate();
-  }, [candidate]);
-
   return (
     <div className="scrabble-container">
       <Menu widths={5}>
-        {levelTypes.map((name) => (
+        {levelTypes.map((name, i) => (
           <Menu.Item
             name={name}
             active={level === name}
             onClick={() => onLevelTypesClick(name)}
+            key={i}
           >
             {name}
           </Menu.Item>
