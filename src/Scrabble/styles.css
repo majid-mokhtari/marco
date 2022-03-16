@@ -18,17 +18,25 @@
 }
 
 .board-col span.letter {
-  padding: 25px 50px;
+  width: 100px;
+  padding: 20px 5px;
   border-radius: 10px;
   background-color: antiquewhite;
   font-size: 30px;
 }
 
 .board-col span.candidate {
-  padding: 25px 50px;
+  width: 100px;
+  padding: 20px 5px;
   border-radius: 10px;
   background-color: lightgray;
   font-size: 30px;
+}
+
+.board-col span.candidate.overlap,
+.board-col span.letter.overlap {
+  width: 50px;
+  margin-left: 5px;
 }
 
 .level-types-btns {

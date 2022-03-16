@@ -1,64 +1,31 @@
 import { useEffect, useState } from "react";
 import { Menu } from "semantic-ui-react";
+import Board from "./Board";
 import "./styles.css";
-
-const Board = ({ board, candidate }) => {
-  const column = board.length && board[0].length;
-  const { row, col } = candidate.length && candidate[0];
-
-  console.log("col", column);
-
-  const getClassName = (boardRow, boardCol) => {
-    if (boardRow === row && boardCol === col) {
-      return "candidate";
-    }
-    return "letter";
-  };
-
-  return (
-    board.length &&
-    board.map((arr, boardRow) => {
-      return (
-        <div className="board-row" key={boardRow}>
-          {arr.map((letter, boardCol) => (
-            <div className="board-col" key={boardCol}>
-              <span className={letter && getClassName(boardRow, boardCol)}>
-                {letter}
-              </span>
-            </div>
-          ))}
-        </div>
-      );
-    })
-  );
-};
 
 const levelTypes = ["start", "out-of-bounds", "overlap", "rectangle", "large"];
 
-export default function App() {
+export default function Scrabble() {
   const [level, setLevel] = useState("start");
   const [candidate, setCandidate] = useState([]);
   const [board, setBoard] = useState([]);
 
   const mergeBoardAndCandidate = (board, candidate) => {
-    const { row, col, letter } = candidate.length && candidate[0];
-    console.log(row, col, letter);
-    console.log(board);
-    setBoard(
-      board.map((arr, i) => {
-        if (i === row) {
-          arr[col] = letter;
-          return arr;
-        } else {
-          return arr;
-        }
-      })
-    );
+    let updatedBoard = [...board];
+
+    candidate.forEach((data, i) => {
+      const { row, col, letter } = data;
+      console.log(row, col, letter, updatedBoard);
+      if (row < 4 && col < 4) {
+        updatedBoard[row][col] = updatedBoard[row][col]
+          ? updatedBoard[row][col] + letter
+          : letter;
+      }
+    });
+    setBoard(updatedBoard);
   };
 
-  const onLevelTypesClick = (l) => {
-    setLevel(l);
-  };
+  const onLevelTypesClick = (l) => setLevel(l);
 
   useEffect(() => {
     const fetchApi = async () => {

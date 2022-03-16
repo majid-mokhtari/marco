@@ -6,14 +6,6 @@ import "./App.css";
 function App() {
   const panes = [
     {
-      menuItem: "Timers",
-      render: () => (
-        <Tab.Pane attached={false}>
-          <Timers />
-        </Tab.Pane>
-      ),
-    },
-    {
       menuItem: "Scrabble",
       render: () => (
         <Tab.Pane attached={false}>
@@ -21,11 +13,19 @@ function App() {
         </Tab.Pane>
       ),
     },
+    {
+      menuItem: "Timers",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <Timers />
+        </Tab.Pane>
+      ),
+    },
   ];
 
   return (
     <div className="app-container">
-      <Tab panes={panes} menu={{ pointing: true }} />
+      <Tab panes={panes} menu={{ pointing: true }} defaultActiveIndex={0} />
     </div>
   );
 }
