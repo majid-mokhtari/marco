@@ -1,0 +1,51 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.dashboard-container {
+  display: flex;
+}
+
+.dashboard-col {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  height: 100vh;
+  border: 1px solid black;
+  text-align: center;
+  align-items: center;
+}
+
+.create-new {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.col-name {
+  padding: 10px;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.card {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: beige;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-buttons {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+}
+
+.card-buttons button {
+  width: 40%;
+}
