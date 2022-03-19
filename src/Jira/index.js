@@ -11,6 +11,8 @@ const Jira = () => {
   });
 
   const onMoveLeftClick = (id, colType) => {
+    console.log("left clicked", id, colType);
+
     if (colType === "done") {
       setDashboard((dashboard) => ({
         ...dashboard,
