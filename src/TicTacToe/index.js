@@ -8,23 +8,25 @@ export default function TicTacToe() {
     ["", "", ""],
   ]);
   const [player, setPlayer] = useState(1);
-
   const [results, setResults] = useState({
     row: new Array(3).fill(0),
     col: new Array(3).fill(0),
     rightDiagnol: 0,
     leftDiagnol: 0,
   });
+  const [winner, setWinner] = useState(null);
 
   const onCellClick = (i, j) => {
+    if (winner) return;
+
     const updatedGame = [...game];
     updatedGame[i][j] = player === 1 ? "X" : "O";
     setGame(updatedGame);
 
-    const winner = checkResults(i, j);
+    const hasWinner = checkResults(i, j);
 
-    if (winner) {
-      console.log("Player " + winner + " Won!");
+    if (hasWinner) {
+      setWinner(hasWinner);
     } else {
       setPlayer(player === 1 ? -1 : 1);
     }
@@ -57,21 +59,28 @@ export default function TicTacToe() {
       Math.abs(rightDiagnol) === 3 ||
       Math.abs(leftDiagnol) === 3
     ) {
-      return player;
+      return player === 1 ? 1 : 2;
     }
   };
 
   return (
     <div className="game-board">
-      {game.map((row, i) => (
-        <div key={i} className="game-row">
-          {row.map((col, j) => (
-            <div key={j} className="game-col" onClick={() => onCellClick(i, j)}>
-              {col}
-            </div>
-          ))}
-        </div>
-      ))}
+      <div>
+        {game.map((row, i) => (
+          <div key={i} className="game-row">
+            {row.map((col, j) => (
+              <div
+                key={j}
+                className="game-col"
+                onClick={() => onCellClick(i, j)}
+              >
+                {col}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      {winner && <div className="game-winner">Player {winner} won!</div>}
     </div>
   );
 }
