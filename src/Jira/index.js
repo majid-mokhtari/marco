@@ -82,11 +82,10 @@ const Jira = () => {
   };
 
   useEffect(() => {
-    //fetch api
     setDashboard({
-      toDo: [getCardComponent("toDo")],
-      inProgress: [getCardComponent("inProgress")],
-      done: [getCardComponent("done")],
+      toDo: [],
+      inProgress: [],
+      done: [],
     });
   }, []);
 

@@ -3,6 +3,7 @@ import Scrabble from "./Scrabble";
 import Jira from "./Jira";
 import { Tab } from "semantic-ui-react";
 import "./App.css";
+import TicTacToe from "./TicTacToe";
 
 function App() {
   const panes = [
@@ -30,11 +31,19 @@ function App() {
         </Tab.Pane>
       ),
     },
+    {
+      menuItem: "TicTacToe",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <TicTacToe />
+        </Tab.Pane>
+      ),
+    },
   ];
 
   return (
     <div className="app-container">
-      <Tab panes={panes} menu={{ pointing: true }} defaultActiveIndex={2} />
+      <Tab panes={panes} menu={{ pointing: true }} defaultActiveIndex={3} />
     </div>
   );
 }
