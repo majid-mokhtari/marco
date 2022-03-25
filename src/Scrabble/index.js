@@ -5,6 +5,14 @@ import "./styles.css";
 
 const levelTypes = ["start", "out-of-bounds", "overlap", "rectangle", "large"];
 
+const LevelTypesNames = {
+  start: "Start",
+  "out-of-bounds": "Out-of-bounds",
+  overlap: "Overlap",
+  rectangle: "Rectangle",
+  large: "Large",
+};
+
 export default function Scrabble() {
   const [level, setLevel] = useState("start");
   const [candidate, setCandidate] = useState([]);
@@ -66,7 +74,7 @@ export default function Scrabble() {
             onClick={() => onLevelTypesClick(name)}
             key={i}
           >
-            {name}
+            {LevelTypesNames[name]}
           </Menu.Item>
         ))}
       </Menu>
