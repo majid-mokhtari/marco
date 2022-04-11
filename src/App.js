@@ -4,6 +4,8 @@ import Jira from "./Jira";
 import { Tab } from "semantic-ui-react";
 import "./App.css";
 import TicTacToe from "./TicTacToe";
+import BST from "./BST";
+import Giphy from "./Giphy";
 
 function App() {
   const panes = [
@@ -39,11 +41,27 @@ function App() {
         </Tab.Pane>
       ),
     },
+    {
+      menuItem: "BST",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <BST value={"10"} />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Giphy",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <Giphy />
+        </Tab.Pane>
+      ),
+    },
   ];
 
   return (
     <div className="app-container">
-      <Tab panes={panes} menu={{ pointing: true }} defaultActiveIndex={3} />
+      <Tab panes={panes} menu={{ pointing: true }} defaultActiveIndex={5} />
     </div>
   );
 }

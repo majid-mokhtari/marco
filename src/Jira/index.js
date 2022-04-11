@@ -3,6 +3,12 @@ import { Button } from "semantic-ui-react";
 import Card from "./Card";
 import "./styles.css";
 
+const JiraColNames = {
+  toDo: "To Do",
+  inProgress: "In Progress",
+  done: "Done",
+};
+
 const Jira = () => {
   const [dashboard, setDashboard] = useState({
     toDo: [],
@@ -98,9 +104,10 @@ const Jira = () => {
         {Object.keys(dashboard).map((col, i) => {
           return (
             <div className="dashboard-col" key={i}>
-              <div className="col-name">{col}</div>
-              {dashboard[col].length > 0 &&
-                dashboard[col].map((card, i) => <div key={i}>{card.card}</div>)}
+              <div className="col-name">{JiraColNames[col]}</div>
+              {dashboard[col].map(({ card, id }) => (
+                <div key={id}>{card}</div>
+              ))}
             </div>
           );
         })}
