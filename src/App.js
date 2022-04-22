@@ -6,6 +6,7 @@ import "./App.css";
 import TicTacToe from "./TicTacToe";
 import BST from "./BST";
 import Giphy from "./Giphy";
+import Poke from "./Poke/Poke";
 
 function App() {
   const panes = [
@@ -57,11 +58,19 @@ function App() {
         </Tab.Pane>
       ),
     },
+    {
+      menuItem: "Poke",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <Poke />
+        </Tab.Pane>
+      ),
+    },
   ];
 
   return (
     <div className="app-container">
-      <Tab panes={panes} menu={{ pointing: true }} defaultActiveIndex={5} />
+      <Tab panes={panes} menu={{ pointing: true }} defaultActiveIndex={6} />
     </div>
   );
 }

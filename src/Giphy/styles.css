@@ -3,6 +3,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: auto;
   margin-top: 50px;
+}
+
+.giphy-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.giphy-wrapper i {
+  font-size: 50px;
+  cursor: pointer;
 }

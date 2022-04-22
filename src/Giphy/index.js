@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { Icon } from "semantic-ui-react";
 import "./styles.css";
+
+const apiKey = "smci7eAzejq3LJs77bipHDe95GAHOZjz";
 
 export default function Giphy() {
   const [images, setImages] = useState([]);
-  const [giphyVal, setGiphyVal] = useState("");
+  const [giphyVal, setGiphyVal] = useState("giphy");
+  const [offset, setOffset] = useState(0);
 
   const myDebounce = (cb, delay) => {
     let timer;
@@ -19,9 +23,9 @@ export default function Giphy() {
     setGiphyVal(e.target.value);
   }, 1000);
 
-  const fetchApi = async (term) => {
+  const fetchApi = async () => {
     let response = await fetch(
-      `http://api.giphy.com/v1/gifs/search?q=${term}&api_key=smci7eAzejq3LJs77bipHDe95GAHOZjz&limit=12`
+      `http://api.giphy.com/v1/gifs/search?q=${giphyVal}&api_key=${apiKey}&offset=${offset}&limit=12`
     );
 
     response = await response.json();
@@ -35,19 +39,34 @@ export default function Giphy() {
     }
   };
 
-  useEffect(() => {
-    fetchApi(giphyVal);
-  }, [giphyVal]);
+  const onNextClick = () => {
+    setOffset(offset + 12);
+  };
 
-  console.log("images", images);
+  const onPrevClick = () => {
+    setOffset(offset - 12);
+  };
+
+  useEffect(() => {
+    fetchApi();
+  }, [giphyVal, offset]);
+
   return (
     <div>
       <label>Enter Search Term: </label>
       <input type="text" onChange={onSearchChange} />
-      <div className="giphy-container">
-        {images.map((img, i) => (
-          <img src={img.fixed_width.url} alt="test" key={i} />
-        ))}
+      <div className="giphy-wrapper">
+        <Icon
+          name="angle double left"
+          disabled={offset === 0}
+          onClick={onPrevClick}
+        />
+        <div className="giphy-container">
+          {images.map((img, i) => (
+            <img src={img.fixed_width.url} alt="test" key={i} />
+          ))}
+        </div>
+        <Icon name="angle double right" onClick={onNextClick} />
       </div>
     </div>
   );
